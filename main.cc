@@ -149,7 +149,6 @@ struct Simulation{
                      //e.to=adjlist[e.from][floor((double) rand() * indeg / RAND_MAX)];
                         if(units[e.from].q_length!=0)
                         units[e.from].q_length--;
-                        cout<<"Job "<<e.index<< " comes from "<<e.from<<" at time "<<e.time<<endl;
                     for (int i = 0; i < indeg; i++) {
                         if(units[adjlist[e.from][i]].q_length<shortest_q ){
                           shortest_q= units[adjlist[e.from][i]].q_length;
@@ -157,16 +156,13 @@ struct Simulation{
                             s_index=i;
 
                         }
-                        cout<<"Unit"<<adjlist[e.from][i]<<": "<<units[adjlist[e.from][i]].q_length<<" "<<endl;
 
                     }
-                    cout<<"Job "<<e.index<<" goes to "<<adjlist[e.from][s_index]<<endl;
                     if(type==1){
                    e.to = adjlist[e.from][s_index];}
                     else if (type==0){
                      e.to=adjlist[e.from][floor((double) rand() * indeg / RAND_MAX)];}
-               }else{                        cout<<"Job "<<e.index<< " comes from "<<e.from<< " at time "<<e.time<<endl;
-                    cout<<"job "<<e.index<<" goes to "<<0<<endl;
+               }else{                     
 
                 }
                 f.from=e.to;
@@ -179,7 +175,6 @@ struct Simulation{
                 tup t;
                 t.index = e.index;
                 t.time = e.time - arrivals[e.index];
-                cout<<e.index<<" exited "<<e.time<<endl;
                 end_time.push(t);
                 if(e.time>total)
                     total=e.time;
