@@ -1,3 +1,9 @@
+//
+// Author  : <Güneykan Özgül> 
+//           Bogazici University, Computer Engineering
+// Project ://Implementation Of Discrete Event Simulation in C++.
+//The code below is only for illustration purposes and neither well optimised nor is the best way of implementing any method.
+
 #include <iostream>
 #include <queue>
 #include <fstream>
@@ -5,6 +11,11 @@
 #include <sstream>
 #include <math.h>
 #include <iomanip>
+
+
+// Compile command:  g++ --std=c++11 main.cc -o dse
+// Run command 1:    ./dse filename
+
 using namespace std;
 struct tup{
     int index;
@@ -25,14 +36,11 @@ struct Unit{
     double run_time;
     //Next time that this unit is available.
     double free;
-    double waited;
     int q_length;
-    queue<double>waste;
     Unit(){
         free=0;
         busy_time=0;
         max_length=0;
-        waited=0;
         q_length=0;
     }
     //Process a job and calculate its process time in this unit.
@@ -43,14 +51,10 @@ struct Unit{
             e_time = free + run_time;
             max_length=max(max_length,(int)((e_time-time)/run_time));
             q_length=(int)((e_time-time)/run_time);
-            waste.push(0);
     }
         else{
 
             e_time = time + run_time;
-            waste.push(time-free);
-            waited=waited+(time-free);
-            //q_length=1;
         }
         busy_time+=run_time;
         free=e_time;
